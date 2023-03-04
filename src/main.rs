@@ -10,8 +10,10 @@ fn main() {
         .map(|x| x.as_str())
         .collect::<Vec<&str>>()
         .join(" ");
-    let mut conn = Connection::new(&include_str!("../cookie").replace("\n", "")).unwrap();
+
+    let mut conn = Connection::new_dev(&include_str!("../cookie").replace("\n", "")).unwrap();
     &conn.send(&message);
+
     loop {
         let msg = &conn.read_msg().unwrap();
         println!("{}: {}", msg["nick"], msg["data"]);
